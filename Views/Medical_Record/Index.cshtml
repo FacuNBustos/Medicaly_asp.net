@@ -1,0 +1,62 @@
+﻿@model Medicaly.ModelsView.MedicalRecordsViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<form asp-action="Index" method="get">
+    <p>
+        Paciente DNI: <input type="number" name="searchDni" value="@Model.searchDni"/>
+
+        <button type="submit">Filtrar</button>
+    </p>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ListMedicalRecords[0].Staff)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ListMedicalRecords[0].Patient)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ListMedicalRecords[0].CreateAt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ListMedicalRecords[0].Description)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.ListMedicalRecords)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Staff.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Patient.Dni)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreateAt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<partial name="_paginador" for="@Model.paginador" />
