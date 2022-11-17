@@ -74,7 +74,10 @@
             @Html.DisplayNameFor(model => model.Photo)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Photo)
+            @if (!string.IsNullOrEmpty(@Model.Photo))
+            {
+                <img src="~/assets/patients/@Model.Photo" class="rounded" style="height:100px" asp-append-version="true" />
+            }
         </dd>
     </dl>
 </div>
